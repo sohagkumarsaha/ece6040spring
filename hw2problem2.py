@@ -1,39 +1,38 @@
 # Name: Sohag Kumar Saha
-# Assignment-2/HW-2 (Problem 2) 
+# Homework 2, Problem 2
 # ECE 6040 (Signal Analysis), Spring 2023
 # Tennessee Tech University 
 
-#import numpy, matplotlib library
-
-
-# Name: Sohag Kumar Saha
-# Homework 2, Problem 2
+#import numpy library
 
 import numpy as np
 
+# declaring user define function for inner product calculation 
 def inner_product(N):
     # Create the basis set b_k [n]
     n = np.arange(N)
     b_k = np.zeros((N, N))
+    b_l = np.zeros((N,N))
+    
+    #calculation of b_k[n]
     for k in range(N):
         if k == 0:
             b_k[k, :] = 1 / np.sqrt(N)
         else:
-            b_k[k, :] = np.sqrt(2 / N) * np.cos(np.pi / N * (n + 0.5) * k)
+            b_k[k, :] = np.sqrt(2 / N) * np.cos(((np.pi) / N) * (n + 0.5) * k)
 
-            
+    # calculation of conjugate of bk[n] which is termed as bl[n]        
     for l in range(N):   
         if l == 0:
-            b_k[l, :] = np.conj (1 / np.sqrt(N))
+            b_l[l, :] = np.conj (1 / np.sqrt(N))
         else:
-            b_k[l, :] = np.conj(np.sqrt(2 / N) * np.cos(np.pi / N * (n + 0.5) * l))
+            b_l[l, :] = np.conj(np.sqrt(2 / N) * np.cos(((np.pi) / N)  * (n + 0.5) * l))
     
     # Calculate the inner product between each element of the basis set
     inner_products = np.zeros((N, N))
     for k in range(N):
         for l in range(N):
-            inner_products[k, l] = np.inner(b_k[k, :], b_k[l, :])
-    
+            inner_products[k, l] = (np.inner(b_k[k, :], b_l[l, :]))   
     return inner_products
 
 
@@ -45,7 +44,7 @@ def main():
     print("N =", N)
     for k in range(N):
         for l in range(N):
-            print("k =", k, "l =", l, "inner_product =", inner_products[k, l])
+            print("k =", k, ", l =", l, ", inner_product = ", inner_products[k, l])
 
     # Calculate the inner product for N = 64
     N = 64
@@ -53,7 +52,7 @@ def main():
     print("N =", N)
     for k in range(N):
         for l in range(N):
-            print("k =", k, "l =", l, "inner_product =", inner_products[k, l])
+            print("k =", k, ", l =", l, ", inner_product = ", inner_products[k, l])
 
     # Calculate the inner product for N = 128
     N = 128
@@ -61,8 +60,8 @@ def main():
     print("N =", N)
     for k in range(N):
         for l in range(N):
-            print("k =", k, "l =", l, "inner_product =", inner_products[k, l])
-        
+            print("k =", k, ", l =", l, ", inner_product = ", inner_products[k, l])
+
         
 if __name__ == '__main__':
     main()       
