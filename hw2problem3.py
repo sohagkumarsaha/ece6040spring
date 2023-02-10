@@ -8,20 +8,21 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+# initialize values
 N = 8
 n = np.arange(N)
 x = 0.1 * n
 
-# Define Function for Discrete Fourier Transform 
-def DFT(x):
+# Define Function for Discrete Fourier Transform  - DFT
+def DFT_Function(x):
     X = np.zeros(N, dtype=complex)
     for k in range(N):
         for n in range(N):
             X[k] += x[n] * (1/(np.sqrt(N)))  * np.exp((1j *2* np.pi * k * n) / N)
     return X
 
-# Define Function for Discrete Consine Transform 
-def DCT(x):
+# Define Function for Discrete Consine Transform - DCT
+def DCT_Function(x):
     X = np.zeros(N)
     for k in range(N):
         if k == 0:
@@ -40,8 +41,8 @@ def DCT(x):
 def main(): 
 
     
-    X_f = DFT(x) # calling DFT function
-    X_c = DCT(x) # calling DCT function 
+    X_f = DFT_Function(x) # calling DFT function
+    X_c = DCT_Function(x) # calling DCT function 
 
 
     # For pretty looking fonts
@@ -73,9 +74,9 @@ def main():
     Sq_DCT = np.sum(abs(X_c)**2)
     
     if Sq_DFT == Sq_DCT:
-        print ('The parseval theorem is true!')
+        print ('Comments on the satisfactory of the parseval theorem: The Parseval-s theorem is found: True!')
     else:
-        print ('The parseval theorem is false!' )
+        print ('Comments on the satisfactory of the parseval theorem: The parseval-s theorem is found: False!' )
     
     
 if __name__ == '__main__':
