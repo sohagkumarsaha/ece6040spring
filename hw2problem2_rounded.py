@@ -32,7 +32,13 @@ def inner_product(N):
     inner_products = np.zeros((N, N))
     for k in range(N):
         for l in range(N):
+            
+            # the inner product values (no rounding here)
+            #inner_products[k, l] = round(np.inner(b_k[k, :], b_l[l, :]))   
+            
+            # rounding the inner product values so that we get zero or one rather than very small decimal values
             inner_products[k, l] = round(np.inner(b_k[k, :], b_l[l, :]))   
+            
     return inner_products
 
 # define main function
