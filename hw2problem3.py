@@ -77,9 +77,9 @@ def main():
     Sq_DCT = round((np.sum(abs(X_c)**2)),2) 
     
     if Sq_DFT == Sq_DCT:
-        print ('Comments on the satisfactory of the parseval theorem: The Parseval-s theorem is found: True!')
+        print ('Comments on the proof of Parseval Theorem: The Parseval-s theorem is found: True!')
     else:
-        print ('Comments on the satisfactory of the parseval theorem: The parseval-s theorem is found: False!' )
+        print ('Comments on the proof of Parseval Theorem: The parseval-s theorem is found: False!' )
     
     
 if __name__ == '__main__':
