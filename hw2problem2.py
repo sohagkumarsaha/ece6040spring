@@ -35,7 +35,7 @@ def inner_product(N):
             inner_products[k, l] = (np.inner(b_k[k, :], b_l[l, :]))   
     return inner_products
 
-
+# define main function
 def main():
 
     # Calculate the inner product for N = 16
@@ -44,6 +44,7 @@ def main():
     print("N =", N)
     for k in range(N):
         for l in range(N):
+            # printing inner product 
             print("k =", k, ", l =", l, ", inner_product = ", inner_products[k, l])
 
     # Calculate the inner product for N = 64
@@ -52,6 +53,7 @@ def main():
     print("N =", N)
     for k in range(N):
         for l in range(N):
+            # printing inner product 
             print("k =", k, ", l =", l, ", inner_product = ", inner_products[k, l])
 
     # Calculate the inner product for N = 128
@@ -60,6 +62,7 @@ def main():
     print("N =", N)
     for k in range(N):
         for l in range(N):
+            # printing inner product 
             print("k =", k, ", l =", l, ", inner_product = ", inner_products[k, l])
 
         
