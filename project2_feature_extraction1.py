@@ -13,6 +13,17 @@ from sklearn.ensemble import RandomForestClassifier
 # Import the necessary libraries for SVM
 from sklearn.svm import SVC
 
+# Import the necessary libraries for K-NN
+from sklearn.neighbors import KNeighborsClassifier
+
+# Import the necessary libraries for Decision Tree 
+from sklearn.tree import DecisionTreeClassifier
+
+
+# Import the necessary libraries for Naive Bayes
+from sklearn.naive_bayes import GaussianNB
+
+
 from sklearn.datasets import make_classification
 from sklearn.metrics import accuracy_score, confusion_matrix, precision_score, recall_score, ConfusionMatrixDisplay, classification_report
 
@@ -307,6 +318,116 @@ def SVM():
     plt.show()
         
 
+# Define the KNN classifier function    
+def KNN():
+    # First Feature extraction of training set
+    Xtrain, Ytrain = FeatureExtractorTrain1()
+    Xtest, Ytest = FeatureExtractorTest1()
+
+    # Apply KNN classification
+    knn = KNeighborsClassifier(n_neighbors=5)
+
+    # Fit the KNN model to the data
+    knn.fit(Xtrain, Ytrain)
+
+    # Generate predictions with the test set
+    y_pred = knn.predict(Xtest)
+
+    # Calculate the accuracy and print the accuracy
+    accuracy = accuracy_score(Ytest, y_pred)
+    print("Accuracy:", accuracy)
+    
+    # Display Metrics
+    display_metrics(Ytest, y_pred, "K-Nearest Neighbors")
+
+    # Create the confusion matrix
+    cm = confusion_matrix(Ytest, y_pred)
+    
+    # Plot the confusion matrix
+    fig, ax = plt.subplots(figsize=(12,12))
+    ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=range(30)).plot(ax=ax)
+    plt.title("Confusion Matrix (K-Nearest Neighbors)", fontsize=16)
+    plt.xticks(fontsize=14)
+    plt.yticks(fontsize=14)
+    plt.savefig('4confusion_matrix_KNN_first_ftext.pdf', dpi=300, bbox_inches='tight')
+    plt.show()
+
+    
+# Define the Decision Tree classifier function    
+def DecisionTree():
+    # First Feature extraction of training set
+    Xtrain, Ytrain = FeatureExtractorTrain1()
+    Xtest, Ytest = FeatureExtractorTest1()
+
+    # Apply Decision Tree classification
+    dt = DecisionTreeClassifier()
+
+    # Fit the Decision Tree model to the data
+    dt.fit(Xtrain, Ytrain)
+
+    # Generate predictions with the test set
+    y_pred = dt.predict(Xtest)
+
+    # Calculate the accuracy and print the accuracy
+    accuracy = accuracy_score(Ytest, y_pred)
+    print("Accuracy:", accuracy)
+    
+    # Display Metrics
+    display_metrics(Ytest, y_pred, "Decision Tree")
+
+    # Create the confusion matrix
+    cm = confusion_matrix(Ytest, y_pred)
+    
+    # Plot the confusion matrix
+    fig, ax = plt.subplots(figsize=(12,12))
+    ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=range(30)).plot(ax=ax)
+    plt.title("Confusion Matrix (Decision Tree)", fontsize=16)
+    plt.xticks(fontsize=14)
+    plt.yticks(fontsize=14)
+    plt.savefig('5confusion_matrix_DT_first_ftext.pdf', dpi=300, bbox_inches='tight')
+    plt.show()
+    
+    
+# Define the Naive Bayes classifier function    
+def NaiveBayes():
+    # First Feature extraction of training set
+    Xtrain, Ytrain = FeatureExtractorTrain1()
+    Xtest, Ytest = FeatureExtractorTest1()
+
+    ## Second Feature extraction of training set
+    #Xtrain, Ytrain = FeatureExtractorTrain2()
+    #Xtest, Ytest = FeatureExtractorTest2()
+
+    # Apply Naive Bayes classification
+    nb = GaussianNB()
+
+    # Fit the Naive Bayes model to the data
+    nb.fit(Xtrain, Ytrain)
+
+    # Generate predictions with the test set
+    y_pred = nb.predict(Xtest)
+
+    # Calculate the accuracy and print the accuracy
+    accuracy = accuracy_score(Ytest, y_pred)
+    print("Accuracy:", accuracy)
+    
+    # Display Metrics
+    display_metrics(Ytest, y_pred, "Naive Bayes")
+
+    # Create the confusion matrix
+    cm = confusion_matrix(Ytest, y_pred)
+    
+    # Plot the confusion matrix
+    fig, ax = plt.subplots(figsize=(12,12))
+    ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=range(30)).plot(ax=ax)
+    plt.title("Confusion Matrix (Naive Bayes)", fontsize=16)
+    plt.xticks(fontsize=14)
+    plt.yticks(fontsize=14)
+    plt.savefig('5confusion_matrix_NaiveBayes_first_ftext.pdf', dpi=300, bbox_inches='tight')
+    plt.show()
+    
+    
+        
 # Define main function
 def main():
     ## Use Random Forest Classfier with first feature extraction
@@ -324,6 +445,25 @@ def main():
     print("Run Support Vector Machine with First Feature Extraction:")
     print("Running......")
     SVM()
+
+    
+    ## Use KNN with first feature extraction
+    print("Run k-NN with First Feature Extraction:")
+    print("Running......")
+    KNN()    
+    
+ 
+    ## Use Decision Tree with first feature extraction
+    print("Run Decision Tree with First Feature Extraction:")
+    print("Running......")
+    DecisionTree() 
+    
+    
+    ## Use Naive Bayes with first feature extraction
+    print("Run Naive Bayes with First Feature Extraction:")
+    print("Running......")
+    NaiveBayes()  
+
 
     # Use Random Forest Classfier with second feature extraction
     #print("Run Random Forest Classifier with Second Feature Extraction:")
