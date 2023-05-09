@@ -13,6 +13,18 @@ from sklearn.ensemble import RandomForestClassifier
 # Import the necessary libraries for SVM
 from sklearn.svm import SVC
 
+
+# Import the necessary libraries for K-NN
+from sklearn.neighbors import KNeighborsClassifier
+
+# Import the necessary libraries for Decision Tree 
+from sklearn.tree import DecisionTreeClassifier
+
+
+# Import the necessary libraries for Naive Bayes
+from sklearn.naive_bayes import GaussianNB
+
+
 from sklearn.datasets import make_classification
 from sklearn.metrics import accuracy_score, confusion_matrix, precision_score, recall_score, ConfusionMatrixDisplay, classification_report
 
@@ -181,9 +193,6 @@ def FeatureExtractorTest2():
 
 # Define first classifier: Random Forest Classifier
 def RFC():
-    # First Feature extraction of training set
-    #Xtrain, Ytrain = FeatureExtractorTrain1()
-    #Xtest, Ytest = FeatureExtractorTest1()
 
     ## Second Feature extraction of training set
     Xtrain, Ytrain = FeatureExtractorTrain2()
@@ -217,14 +226,11 @@ def RFC():
     plt.title("Confusion Matrix (Random Forest Classifier)", fontsize=16)
     plt.xticks(fontsize=14)
     plt.yticks(fontsize=14)
-    plt.savefig('4confusion_matrix_rfc_second_ftext.pdf', dpi=300, bbox_inches='tight')
+    plt.savefig('1confusion_matrix_rfc_second_ftext.pdf', dpi=300, bbox_inches='tight')
     plt.show()
 
 # Define second classifier: LDA
 def LDA():
-    # First Feature extraction of training set
-    #Xtrain, Ytrain = FeatureExtractorTrain1()
-    #Xtest, Ytest = FeatureExtractorTest1()
 
     ## Second Feature extraction of training set
     Xtrain, Ytrain = FeatureExtractorTrain2()
@@ -260,7 +266,7 @@ def LDA():
     plt.title("Confusion Matrix (Linear Discriminant Analysis)", fontsize=16)
     plt.xticks(fontsize=14)
     plt.yticks(fontsize=14)
-    plt.savefig('5confusion_matrix_LDA_secondftext.pdf', dpi=300, bbox_inches='tight')
+    plt.savefig('2confusion_matrix_LDA_secondftext.pdf', dpi=300, bbox_inches='tight')
     plt.show()
 
     
@@ -268,9 +274,6 @@ def LDA():
         
 # Define the SVM classifier function
 def SVM():
-    # First Feature extraction of training set
-    #Xtrain, Ytrain = FeatureExtractorTrain1()
-    #Xtest, Ytest = FeatureExtractorTest1()
 
     ## Second Feature extraction of training set
     Xtrain, Ytrain = FeatureExtractorTrain2()
@@ -302,28 +305,120 @@ def SVM():
     plt.title("Confusion Matrix (Support Vector Machine)", fontsize=16)
     plt.xticks(fontsize=14)
     plt.yticks(fontsize=14)
-    plt.savefig('6confusion_matrix_SVM_secondftext.pdf', dpi=300, bbox_inches='tight')
+    plt.savefig('3confusion_matrix_SVM_secondftext.pdf', dpi=300, bbox_inches='tight')
     plt.show()
         
 
 
 
+# Define the KNN classifier function    
+def KNN():
+    # Second Feature extraction of training set
+    Xtrain, Ytrain = FeatureExtractorTrain2()
+    Xtest, Ytest = FeatureExtractorTest2()
+
+    # Apply KNN classification
+    knn = KNeighborsClassifier(n_neighbors=5)
+
+    # Fit the KNN model to the data
+    knn.fit(Xtrain, Ytrain)
+
+    # Generate predictions with the test set
+    y_pred = knn.predict(Xtest)
+
+    # Calculate the accuracy and print the accuracy
+    accuracy = accuracy_score(Ytest, y_pred)
+    print("Accuracy:", accuracy)
+    
+    # Display Metrics
+    display_metrics(Ytest, y_pred, "K-Nearest Neighbors")
+
+    # Create the confusion matrix
+    cm = confusion_matrix(Ytest, y_pred)
+    
+    # Plot the confusion matrix
+    fig, ax = plt.subplots(figsize=(12,12))
+    ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=range(30)).plot(ax=ax)
+    plt.title("Confusion Matrix (K-Nearest Neighbors)", fontsize=16)
+    plt.xticks(fontsize=14)
+    plt.yticks(fontsize=14)
+    plt.savefig('4confusion_matrix_KNN_second_ftext.pdf', dpi=300, bbox_inches='tight')
+    plt.show()
+
+    
+# Define the Decision Tree classifier function    
+def DecisionTree():
+    # Second Feature extraction of training set
+    Xtrain, Ytrain = FeatureExtractorTrain2()
+    Xtest, Ytest = FeatureExtractorTest2()
+
+    # Apply Decision Tree classification
+    dt = DecisionTreeClassifier()
+
+    # Fit the Decision Tree model to the data
+    dt.fit(Xtrain, Ytrain)
+
+    # Generate predictions with the test set
+    y_pred = dt.predict(Xtest)
+
+    # Calculate the accuracy and print the accuracy
+    accuracy = accuracy_score(Ytest, y_pred)
+    print("Accuracy:", accuracy)
+    
+    # Display Metrics
+    display_metrics(Ytest, y_pred, "Decision Tree")
+
+    # Create the confusion matrix
+    cm = confusion_matrix(Ytest, y_pred)
+    
+    # Plot the confusion matrix
+    fig, ax = plt.subplots(figsize=(12,12))
+    ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=range(30)).plot(ax=ax)
+    plt.title("Confusion Matrix (Decision Tree)", fontsize=16)
+    plt.xticks(fontsize=14)
+    plt.yticks(fontsize=14)
+    plt.savefig('5confusion_matrix_DT_second_ftext.pdf', dpi=300, bbox_inches='tight')
+    plt.show()
+    
+    
+# Define the Naive Bayes classifier function    
+def NaiveBayes():
+    # Second Feature extraction of training set
+    Xtrain, Ytrain = FeatureExtractorTrain2()
+    Xtest, Ytest = FeatureExtractorTest2()
+
+    # Apply Naive Bayes classification
+    nb = GaussianNB()
+
+    # Fit the Naive Bayes model to the data
+    nb.fit(Xtrain, Ytrain)
+
+    # Generate predictions with the test set
+    y_pred = nb.predict(Xtest)
+
+    # Calculate the accuracy and print the accuracy
+    accuracy = accuracy_score(Ytest, y_pred)
+    print("Accuracy:", accuracy)
+    
+    # Display Metrics
+    display_metrics(Ytest, y_pred, "Naive Bayes")
+
+    # Create the confusion matrix
+    cm = confusion_matrix(Ytest, y_pred)
+    
+    # Plot the confusion matrix
+    fig, ax = plt.subplots(figsize=(12,12))
+    ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=range(30)).plot(ax=ax)
+    plt.title("Confusion Matrix (Naive Bayes)", fontsize=16)
+    plt.xticks(fontsize=14)
+    plt.yticks(fontsize=14)
+    plt.savefig('6confusion_matrix_NaiveBayes_second_ftext.pdf', dpi=300, bbox_inches='tight')
+    plt.show()
+    
+        
+            
 # Define main function
 def main():
-    ## Use Random Forest Classfier with first feature extraction
-    #print("Run Random Forest Classifier with First Feature Extraction:")
-    #print("Running......")
-    #RFC()
-
-    ## Use LDA with first feature extraction
-    #print("Run Linear Discriminant Analysis with First Feature Extraction:")
-    #print("Running......")
-    #LDA()
-    
-    ## Use SVM with first feature extraction
-    #print("Run Support Vector Machine with First Feature Extraction:")
-    #print("Running......")
-    #SVM()
 
     # Use Random Forest Classfier with second feature extraction
     print("Run Random Forest Classifier with Second Feature Extraction:")
@@ -340,6 +435,24 @@ def main():
     print("Run Support Vector Machine with Second Feature Extraction:")
     print("Running......")
     SVM()
+    
+    
+    ## Use KNN with second feature extraction
+    print("Run k-NN with Second Feature Extraction:")
+    print("Running......")
+    KNN()    
+    
+ 
+    ## Use Decision Tree with second feature extraction
+    print("Run Decision Tree with Second Feature Extraction:")
+    print("Running......")
+    DecisionTree() 
+    
+    
+    ## Use Naive Bayes with second feature extraction
+    print("Run Naive Bayes with Second Feature Extraction:")
+    print("Running......")
+    NaiveBayes()  
 
 
 # Call main function
